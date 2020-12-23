@@ -8,16 +8,24 @@ namespace CabInvoiceGeneratorProject
     {
         private int numberOfRides;
         private double totalFare;
-        private double avrageFare;
+        private double averageFare;
 
         /// <summary>
         /// Initializes a new instance of the class.
         /// </summary>
+
         public InvoiceSummary(int numberOfRides, double totalFare)
         {
             this.numberOfRides = numberOfRides;
             this.totalFare = totalFare;
-            this.avrageFare = this.totalFare / this.numberOfRides;
+            this.averageFare = this.totalFare / this.numberOfRides;
+        }
+
+        public InvoiceSummary(int numberOfRides, double totalFare, double averageFare)
+        {
+            this.numberOfRides = numberOfRides;
+            this.totalFare = totalFare;
+            this.averageFare = averageFare;
         }
 
         /// <summary>
@@ -28,7 +36,7 @@ namespace CabInvoiceGeneratorProject
             if (obj == null) return false;
             if (!(obj is InvoiceSummary)) return false;
             InvoiceSummary inputObject = (InvoiceSummary)obj;
-            return this.numberOfRides == inputObject.numberOfRides && this.totalFare == inputObject.totalFare && this.avrageFare == inputObject.avrageFare;
+            return this.numberOfRides == inputObject.numberOfRides && this.totalFare == inputObject.totalFare && this.averageFare == inputObject.averageFare;
         }
 
         /// <summary>
@@ -36,7 +44,7 @@ namespace CabInvoiceGeneratorProject
         /// </summary>
         public override int GetHashCode()
         {
-            return this.numberOfRides.GetHashCode() ^ this.totalFare.GetHashCode() ^ this.avrageFare.GetHashCode();
+            return this.numberOfRides.GetHashCode() ^ this.totalFare.GetHashCode() ^ this.averageFare.GetHashCode();
         }
     }
 }
