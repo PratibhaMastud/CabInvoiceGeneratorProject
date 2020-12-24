@@ -29,7 +29,7 @@ namespace CabInvoiceGeneratorProject
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// Determines whether the specified , is equal to this instance.
         /// </summary>
         public override bool Equals(object obj)
         {

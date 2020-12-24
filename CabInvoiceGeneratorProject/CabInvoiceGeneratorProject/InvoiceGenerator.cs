@@ -8,7 +8,7 @@ namespace CabInvoiceGeneratorProject
     {
         RideType rideType;
         private RideRepository rideRepository;
-
+        private double averageFarePerRide;
         private readonly double MINIMUM_COST_PER_KM;
         private readonly int COST_PER_TIME;
         private readonly double MINIMUM_FARE;
@@ -71,6 +71,8 @@ namespace CabInvoiceGeneratorProject
                 {
                     totalFare += this.CalculateFare(ride.distance, ride.time);
                 }
+                averageFarePerRide = totalFare / rides.Length;
+
             }
             catch (CabInvoiceException)
             {
@@ -79,7 +81,7 @@ namespace CabInvoiceGeneratorProject
                     throw new CabInvoiceException(CabInvoiceException.ExceptionType.NULL_RIDES, "Rides Are Null");
                 }
             }
-            return new InvoiceSummary(rides.Length, totalFare);
+            return new InvoiceSummary(rides.Length, totalFare, averageFarePerRide);
         }
 
         /// <summary>
@@ -89,7 +91,6 @@ namespace CabInvoiceGeneratorProject
         {
             try
             {
-                //Adding Ride To Specifided User
                 rideRepository.AddRide(userId, rides);
             }
             catch (CabInvoiceException)
@@ -111,29 +112,6 @@ namespace CabInvoiceGeneratorProject
             {
                 throw new CabInvoiceException(CabInvoiceException.ExceptionType.INVALID_USER_ID, "Invalid UserId");
             }
-        }
-
-        public InvoiceSummary CalculateFareEnhanced(Ride[] rides, int numOfRides, double averageFarePerRide)
-        {
-            double totalFare = 0;
-            numOfRides = 0;
-            averageFarePerRide = 0;
-            try
-            {
-                foreach (Ride ride in rides)
-                {
-                    totalFare += this.CalculateFare(ride.distance, ride.time);
-                }
-                averageFarePerRide = totalFare / numOfRides;
-            }
-            catch (CabInvoiceException)
-            {
-                if (rides == null)
-                {
-                    throw new CabInvoiceException(CabInvoiceException.ExceptionType.NULL_RIDES, "Rides Are Null");
-                }
-            }
-            return new InvoiceSummary(rides.Length, totalFare, averageFarePerRide);
         }
     }
 }

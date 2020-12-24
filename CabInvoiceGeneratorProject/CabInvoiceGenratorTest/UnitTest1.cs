@@ -6,6 +6,7 @@ namespace CabInvoiceGenratorTest
     public class UnitTest1
     {
         InvoiceGenerator invoiceGenerator = null;
+        RideRepository rideRepository;
         ///<summary>
         /// Test case for UC-1 Given the distance and time when invoice generator then should return total fare.
         ///</summary>
