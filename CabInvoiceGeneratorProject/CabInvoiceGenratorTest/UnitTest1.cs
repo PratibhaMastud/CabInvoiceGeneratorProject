@@ -72,5 +72,23 @@ namespace CabInvoiceGenratorTest
             InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0, 15);
             Assert.AreEqual(expectedSummary, invoiceSummary);
         }
+
+        /// <summary>
+        /// Test Case UC-5 to Calculate Fare for Primium Ride type
+        /// </summary>
+        [Test]
+        public void GivenRides_WhenPremiumAndNormal_ShouldSupportBoth()
+        {
+            invoiceGenerator = new InvoiceGenerator(RideType.PREMIUM);
+            double distance = 3.0;
+            int time = 20;
+
+            double fare = invoiceGenerator.CalculateFare(distance, time);
+            double expected = 85;
+
+            //Asserting Values
+            Assert.AreEqual(expected, fare);
+        }
+
     }
 }
