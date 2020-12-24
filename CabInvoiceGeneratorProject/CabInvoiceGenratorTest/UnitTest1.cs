@@ -55,5 +55,22 @@ namespace CabInvoiceGenratorTest
             //Asserting Values
             Assert.AreEqual(expectedSummary, enhancedSummary);
         }
+
+        /// <summary>
+        /// Test case for UC 4 Givens the multiple rides when user identifier then should return following invoice summary.
+        /// </summary>
+        [Test]
+        public void GivenMultipleRides_WhenUserId_thenShouldReturnFollowingInvoiceSummary()
+        {
+            invoiceGenerator = new InvoiceGenerator(RideType.NORMAL);
+            Ride[] rides = { new Ride(2.0, 5), new Ride(0.1, 1) };
+            RideRepository rideRepository = new RideRepository();
+            string userId = "Dhiraj";
+            rideRepository.AddRide(userId, rides);
+            Ride[] rideData = rideRepository.GetRides(userId);
+            InvoiceSummary invoiceSummary = invoiceGenerator.CalculateFare(rideData);
+            InvoiceSummary expectedSummary = new InvoiceSummary(2, 30.0, 15);
+            Assert.AreEqual(expectedSummary, invoiceSummary);
+        }
     }
 }
